@@ -1,0 +1,103 @@
+<!-- Sanitized sample template. {{ ... }} are n8n expressions; all names are fictional. -->
+<!doctype html>
+<html>
+ <head>
+ <meta charset="utf-8">
+ <meta name="x-apple-disable-message-reformatting">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>ExampleCo | Equipment Return</title>
+  <style>
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ body { margin: 0; padding: 0; background: #FFF9F4; font-family: -apple-system,'Segoe UI',Helvetica,Arial,sans-serif; }
+ .email-wrap { max-width: 600px; margin: 24px auto; font-family: -apple-system,'Segoe UI',Helvetica,Arial,sans-serif; }
+ .banner { background: #2A2340; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; border-radius: 16px 16px 0 0; }
+ .banner-left { display: flex; flex-direction: column; gap: 2px; }
+ .banner-eyebrow { font-size: 11px; color: #FFC9A8; text-transform: uppercase; letter-spacing: .1em; font-weight: 600; }
+ .banner-title { font-family: -apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size: 26px; color: #ffffff; font-weight: 700; }
+ .banner-badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 14px; font-size: 11px; color: #FF9A62; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
+ .card { background: #ffffff; border-radius: 0 0 16px 16px; padding: 32px 32px 28px 32px; border: 0.5px solid #F0DFD3; border-top: none; }
+ .greeting { font-size: 15px; color: #2A2340; margin-bottom: 12px; }
+ .intro { font-size: 14px; color: #2A2340; line-height: 1.7; margin-bottom: 24px; }
+ .qr-box { border: 1.5px solid #FF9A62; border-radius: 12px; background: #FFF6EE; padding: 24px; text-align: center; margin-bottom: 24px; }
+ .qr-label { font-size: 13px; font-weight: 700; color: #2A2340; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 4px; }
+ .qr-sub { font-size: 12px; color: #5A5170; margin-bottom: 16px; }
+ .qr-image { display: block; width: 160px; height: 160px; margin: 0 auto 16px auto; border-radius: 10px; }
+ .rma-row { font-size: 13px; color: #2A2340; margin-bottom: 14px; }
+ .rma-row strong { color: #2A2340; }
+ .find-btn { display: inline-block; background: #C23B4A; color: #fff; font-size: 13px; font-weight: 600; padding: 10px 20px; border-radius: 8px; text-decoration: none; }
+ .qr-note { font-size: 11px; color: #6F6585; margin-top: 12px; }
+ .items-section { background: #F6F3FD; border: 2px solid #8E7CC3; border-radius: 12px; padding: 18px 20px; margin-bottom: 24px; }
+ .items-heading { font-size: 14px; font-weight: 700; color: #3B2F6B; margin-bottom: 14px; }
+ .divider { border: none; border-top: 1px solid #F0DFD3; margin: 20px 0; }
+ .pickup-section { margin-bottom: 20px; border: 2px solid #C23B4A; border-radius: 12px; padding: 18px 20px; background: #FFF3EA; }
+ .pickup-title { font-size: 14px; font-weight: 700; color: #2A2340; margin-bottom: 8px; }
+ .pickup-body { font-size: 13px; color: #2A2340; line-height: 1.7; margin-bottom: 12px; }
+ .pickup-notes { list-style: none; padding: 0; margin: 0; }
+ .pickup-notes li { font-size: 13px; color: #2A2340; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; margin-bottom: 6px; }
+ .pickup-notes li:last-child { margin-bottom: 0; }
+ .check { color: #C23B4A; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+ .sign-off { font-size: 13px; color: #5A5170; line-height: 1.8; margin-top: 8px; }
+ .sign-off strong { color: #2A2340; display: block; font-size: 13px; }
+ .footer { margin-top: 12px; border: 0.5px solid #F0DFD3; border-radius: 12px; padding: 14px 16px; background: #FFF9F4; }
+ .footer-conf { font-size: 11px; font-weight: 700; color: #2A2340; margin-bottom: 4px; }
+ .footer-text { font-size: 11px; color: #6F6585; line-height: 1.6; }
+ .footer-copy { text-align: center; font-size: 11px; color: #6F6585; margin-top: 10px; }
+ @media (prefers-color-scheme: dark) { body { background: #151022; } .card { background: #ffffff; } }
+ </style>
+ </head>
+ <body>
+ <div class="email-wrap">
+ <div class="banner">
+ <div class="banner-left">
+ <div class="banner-eyebrow">Offboarding Notification</div>
+ <div class="banner-title">Equipment Return</div>
+ </div>
+ <div class="banner-badge">Action Required</div>
+ </div>
+ <div class="card">
+ <p class="greeting">Hi {{ $('Jira Offboard Webhook1').item.json.body.PreferredFirst }},</p>
+ <p class="intro">To complete your offboarding, please prepare your ExampleCo-owned devices for return. Bring them to the nearest <strong>FedEx Office Print & Ship Center</strong> and show the QR code below for scanning.</p>
+ <div class="qr-box">
+ <div class="qr-label">FedEx Return QR Code</div>
+ <div class="qr-sub">Show at FedEx Office Print & Ship locations only</div>
+ <img
+ src="data:image/png;base64,{{ $json.qr_code_file.data }}"
+ alt="FedEx Return QR Code"
+ width="160"
+ height="160"
+ class="qr-image"
+ />
+ <div class="rma-row"><strong>RMA Number:</strong> {{ $('Generate QR Code Image1').item.json.rma_number }}</div>
+ <a href="https://www.google.com/maps/search/FedEx+Office+Print+near+{{ $('Parse Address & Phone1').item.json.city }}+{{ $('Parse Address & Phone1').item.json.state }}+{{ $('Parse Address & Phone1').item.json.postal_code }}"
+ class="find-btn"
+ >Find Nearby FedEx Office</a>
+ <p class="qr-note">No printer or boxes required unless a scheduled pickup is requested</p>
+ </div>
+ <div class="items-section">
+ <div class="items-heading">💻 Items to be returned</div>
+ <div class="asset-rows">{{ $json.asset_rows_html }}</div>
+ </div>
+ <hr class="divider">
+ <div class="pickup-section">
+ <div class="pickup-title">⚠️ Need a scheduled pickup instead?</div>
+ <p class="pickup-body">Reply to this email with how many boxes you need, then call <strong>1-800-555-0100</strong>. Have the following ready:</p>
+ <ul class="pickup-notes">
+ <li><span class="check">✓</span> Not a freight shipment</li>
+ <li><span class="check">✓</span> Ground pickup (match this to the shipping type)</li>
+ <li><span class="check">✓</span> Label does not say "stamp"</li>
+ <li><span class="check">✓</span> Company name: <strong>ExampleCo</strong></li>
+ </ul>
+ </div>
+ <div class="sign-off">
+ <p>Thank you,</p>
+ <strong>ExampleCo IT</strong>
+ </div>
+ </div>
+ <div class="footer">
+ <div class="footer-conf">ExampleCo Confidential</div>
+ <div class="footer-text">This message (and any attachments) is intended only for the addressee and may contain confidential information. If you received it in error, please delete it and notify the sender.</div>
+ </div>
+ <div class="footer-copy">© ExampleCo</div>
+</div>
+</body>
+</html>

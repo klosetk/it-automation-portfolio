@@ -1,0 +1,156 @@
+<!-- Sanitized sample template. {{ ... }} are n8n expressions; all names are fictional. -->
+<!doctype html>
+<html>
+ <head>
+ <meta charset="utf-8">
+ <meta name="x-apple-disable-message-reformatting">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>ExampleCo | Employee Office Departure Notification</title>
+  <style>
+ @media (prefers-color-scheme: dark) {
+ .bg-body { background-color: #151022 !important; }
+ .card { background-color: #FFFFFF !important; }
+ }
+ @media only screen and (max-width: 620px) {
+ .detail-row td { display: block !important; width: 100% !important; }
+ }
+ </style>
+ </head>
+ <body style="margin:0;padding:0;" class="bg-body">
+ <center role="article" aria-roledescription="email" lang="en" style="width:100%;background:#FFF9F4;">
+ <table role="presentation" style="width:100%;border-collapse:collapse;">
+ <tr>
+ <td style="background:linear-gradient(90deg,#FFB38A,#FF8FA3,#B7A6E8,#8EC5E8);height:5px;font-size:0;line-height:0;"> </td>
+ </tr>
+ </table>
+ <table role="presentation" style="width:100%;border-collapse:collapse;background:#2A2340;">
+ <tr>
+ <td align="center" style="padding:20px 10px 18px 10px;">
+ <table role="presentation" style="width:600px;max-width:600px;border-collapse:collapse;">
+ <tr>
+ <td style="vertical-align:middle;">
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:24px;font-weight:700;color:#FFFFFF;line-height:1.2;margin-bottom:4px;">
+ Employee Office Departure
+ </div>
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:11px;font-weight:600;color:#FF9A62;text-transform:uppercase;letter-spacing:.1em;">
+ Office A  ·  Office Manager Notification
+ </div>
+ </td>
+ </tr>
+ </table>
+ </td>
+ </tr>
+ </table>
+ <table role="presentation" style="width:100%;border-collapse:collapse;">
+ <tr>
+ <td align="center" style="padding:16px 12px 0 12px;">
+ <table role="presentation" class="card" style="width:600px;max-width:600px;border-collapse:separate;border-spacing:0;background:#FFFFFF;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.07);">
+ <tr>
+ <td style="padding:20px 28px 0 28px;">
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:17px;font-weight:700;color:#2A2340;margin-bottom:12px;">Employee Details</div>
+ <table role="presentation" style="width:100%;border-collapse:collapse;background:#FFF3EA;border-radius:12px;overflow:hidden;">
+ <tr>
+ <td style="padding:16px 20px;">
+ <table role="presentation" style="width:100%;border-collapse:collapse;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;color:#2A2340;">
+ <tr class="detail-row">
+ <td style="padding:6px 0;width:36%;color:#C23B4A;font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.06em;vertical-align:middle;">Name</td>
+ <td style="padding:6px 0;font-weight:700;font-size:15px;color:#2A2340;vertical-align:middle;">{{ $('Webhook from Approved Jira Offboard Ticket').item.json.body.PreferredFirst }} {{ $('Webhook from Approved Jira Offboard Ticket').item.json.body.LegalLast }}</td>
+ </tr>
+ <tr><td colspan="2" style="padding:0;"><div style="height:1px;background:#F0DFD3;"></div></td></tr>
+ <tr class="detail-row">
+ <td style="padding:6px 0;color:#C23B4A;font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.06em;vertical-align:middle;">Job Title</td>
+ <td style="padding:6px 0;font-weight:600;color:#2A2340;vertical-align:middle;">{{ $('Webhook from Approved Jira Offboard Ticket').item.json.body.Role }}</td>
+ </tr>
+ <tr><td colspan="2" style="padding:0;"><div style="height:1px;background:#F0DFD3;"></div></td></tr>
+ <tr class="detail-row">
+ <td style="padding:6px 0;color:#C23B4A;font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.06em;vertical-align:middle;">Department</td>
+ <td style="padding:6px 0;color:#2A2340;vertical-align:middle;">{{ $('Webhook from Approved Jira Offboard Ticket').item.json.body.Department }}</td>
+ </tr>
+ <tr><td colspan="2" style="padding:0;"><div style="height:1px;background:#F0DFD3;"></div></td></tr>
+ <tr class="detail-row">
+ <td style="padding:6px 0;color:#C23B4A;font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.06em;vertical-align:middle;">Last Day</td>
+ <td style="padding:6px 0;vertical-align:middle;">
+ <span style="display:inline-block;background:#2A2340;color:#FF9A62;font-weight:700;font-size:12px;padding:3px 10px;border-radius:20px;letter-spacing:.03em;">{{ new Date($('Webhook from Approved Jira Offboard Ticket').item.json.body.SeparationTimeDate).toLocaleString('en-US', {timeZone: 'America/Chicago', month: 'short', day: '2-digit', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true}) }}</span>
+ </td>
+ </tr>
+ <tr><td colspan="2" style="padding:0;"><div style="height:1px;background:#F0DFD3;"></div></td></tr>
+ <tr class="detail-row">
+ <td style="padding:6px 0;color:#C23B4A;font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.06em;vertical-align:middle;">Manager Email</td>
+ <td style="padding:6px 0;color:#2A2340;font-weight:600;vertical-align:middle;">{{ $('Webhook from Approved Jira Offboard Ticket').item.json.body.ManagerEmail }}</td>
+ </tr>
+ </table>
+ </td>
+ </tr>
+ </table>
+ </td>
+ </tr>
+ <tr>
+ <td style="padding:24px 28px 28px 28px;">
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:17px;font-weight:700;color:#2A2340;margin-bottom:4px;">Departure Checklist</div>
+ <p style="margin:0 0 14px 0;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;color:#5A5170;line-height:1.5;">Please complete all items by <strong style="color:#2A2340;">{{ new Date($('Webhook from Approved Jira Offboard Ticket').item.json.body.SeparationTimeDate).toLocaleString('en-US', {timeZone: 'America/Chicago', month: 'short', day: '2-digit', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true}) }}</strong>:</p>
+ <!-- Item 1 -->
+ <table role="presentation" style="width:100%;border-collapse:collapse;margin-bottom:10px;">
+ <tr>
+ <td style="width:32px;vertical-align:middle;text-align:center;">
+ <div style="width:22px;height:22px;border-radius:50%;background:#FF9A62;margin:0 auto;display:inline-block;text-align:center;line-height:22px;font-size:13px;font-weight:700;color:#2A2340;">✓</div>
+ </td>
+ <td style="background:#FFFFFF;border:1px solid #F0DFD3;border-radius:10px;padding:12px 16px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;color:#2A2340;line-height:1.55;vertical-align:middle;">
+ <span style="font-weight:700;color:#2A2340;">Collect Badge & Building Access</span><br>
+ Retrieve the employee's badge or key card and confirm building access has been deactivated.
+ </td>
+ </tr>
+ </table>
+ <!-- Item 2 -->
+ <table role="presentation" style="width:100%;border-collapse:collapse;margin-bottom:10px;">
+ <tr>
+ <td style="width:32px;vertical-align:middle;text-align:center;">
+ <div style="width:22px;height:22px;border-radius:50%;background:#FF9A62;margin:0 auto;display:inline-block;text-align:center;line-height:22px;font-size:13px;font-weight:700;color:#2A2340;">✓</div>
+ </td>
+ <td style="background:#FFFFFF;border:1px solid #F0DFD3;border-radius:10px;padding:12px 16px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;color:#2A2340;line-height:1.55;vertical-align:middle;">
+ <span style="font-weight:700;color:#2A2340;">Equipment Retrieval</span><br>
+ Coordinate with IT to collect all office-provisioned equipment, peripherals, and accessories on or before the last day.
+ </td>
+ </tr>
+ </table>
+ <!-- Item 3 -->
+ <table role="presentation" style="width:100%;border-collapse:collapse;margin-bottom:4px;">
+ <tr>
+ <td style="width:32px;vertical-align:middle;text-align:center;">
+ <div style="width:22px;height:22px;border-radius:50%;background:#FF9A62;margin:0 auto;display:inline-block;text-align:center;line-height:22px;font-size:13px;font-weight:700;color:#2A2340;">✓</div>
+ </td>
+ <td style="background:#FFFFFF;border:1px solid #F0DFD3;border-radius:10px;padding:12px 16px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;color:#2A2340;line-height:1.55;vertical-align:middle;">
+ <span style="font-weight:700;color:#2A2340;">Desk Clearance</span><br>
+ Ensure the vacated desk is cleared, cleaned, and ready for future use.
+ </td>
+ </tr>
+ </table>
+ </td>
+ </tr>
+ </table>
+ </td>
+ </tr>
+ </table>
+ <table role="presentation" style="width:100%;border-collapse:collapse;">
+ <tr>
+ <td align="center" style="padding:16px 12px 24px 12px;">
+ <table role="presentation" style="width:600px;max-width:600px;border-collapse:collapse;">
+ <tr>
+ <td>
+ <div style="padding:14px 16px;border:1px solid #F0DFD3;border-radius:12px;">
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-weight:700;font-size:11px;color:#2A2340;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;">ExampleCo Confidential</div>
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:11px;color:#5A5170;line-height:1.5;">This message is intended only for the named recipient(s) and may contain confidential information. If you received this in error, please delete it and notify the sender.</div>
+ </div>
+ </td>
+ </tr>
+ <tr>
+ <td style="padding-top:12px;text-align:center;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:11px;color:#5A5170;">
+ © ExampleCo  ·  Office A
+ </td>
+ </tr>
+ </table>
+ </td>
+ </tr>
+ </table>
+ </center>
+ </body>
+</html>

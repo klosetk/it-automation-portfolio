@@ -1,0 +1,214 @@
+<!-- Sanitized sample template. {{ ... }} are n8n expressions; all names are fictional. -->
+<!doctype html>
+<html>
+ <head>
+ <meta charset="utf-8">
+ <meta name="x-apple-disable-message-reformatting">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>ExampleCo | New Hire Onboarding</title>
+  <style>
+ * { box-sizing: border-box; }
+ body { margin: 0; padding: 0; background: #FFF9F4; }
+@media only screen and (max-width: 620px) {
+ .email-wrap { width: 100% !important; }
+ .col-half { display: block !important; width: 100% !important; padding: 0 0 12px 0 !important; }
+ .setup-box { height: auto !important; min-height: unset !important; }
+ .header-inner { padding: 28px 20px !important; }
+ .body-pad { padding: 24px 20px !important; }
+ }
+ </style>
+ </head>
+ <body class="bg-body" style="margin:0;padding:0;background:#FFF9F4;">
+ <center style="width:100%;background:#FFF9F4;padding:24px 12px 32px;">
+ <!-- ── EMAIL WRAPPER ─────────────────────────────── -->
+ <table class="email-wrap" role="presentation" width="600" style="width:600px;max-width:600px;border-collapse:collapse;">
+ <!-- ── HEADER ────────────────────────────────────── -->
+ <tr>
+ <td style="padding:0;">
+ <table role="presentation" width="100%" style="border-collapse:collapse;border-radius:16px 16px 0 0;overflow:hidden;background:#2A2340;">
+ <tr>
+ <td class="header-inner" style="padding:36px 36px 32px;">
+ <!-- eyebrow -->
+ <div style="display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:100px;padding:4px 14px;margin-bottom:18px;">
+ <span style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#FF9A62;">New Hire Onboarding</span>
+ </div>
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:32px;line-height:1.2;color:#ffffff;font-weight:700;margin-bottom:10px;">
+ Welcome to ExampleCo
+ </div>
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.5;">
+ We're so glad you're here. Let's get you set up before day one.
+ </div>
+ </td>
+ </tr>
+ <!-- bottom accent bar -->
+ <tr>
+ <td style="height:5px;background:linear-gradient(90deg,#FFB38A,#FF8FA3,#B7A6E8,#8EC5E8);"></td>
+ </tr>
+ </table>
+ </td>
+ </tr>
+ <!-- ── CARD BODY ──────────────────────────────────── -->
+ <tr>
+ <td style="padding:0;">
+ <table class="card-wrap" role="presentation" width="100%" style="border-collapse:collapse;background:#ffffff;border-radius:0 0 16px 16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.08);">
+ <tr>
+ <td class="body-pad" style="padding:32px 36px 40px;">
+ <!-- greeting -->
+ <p style="margin:0 0 8px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;color:#2A2340;">Hi {{ $('Jira: New Onboarding Request').item.json.body.PreferredFirst }},</p>
+ <p style="margin:0 0 28px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.65;color:#2A2340;">
+ Welcome to ExampleCo — we're excited to have you join the team! 🎉<br>
+ To make sure your first day goes smoothly, <strong>please read all steps below, including the PDFs attached, to complete computer setup the day before your start date.</strong>
+ </p>
+ <!-- ── DIVIDER ─────── -->
+ <div style="height:1px;background:#F0DFD3;margin-bottom:28px;"></div>
+ <!-- ── SECTION: LAPTOP DELIVERY ──────────── -->
+ <table role="presentation" width="100%" style="border-collapse:collapse;margin-bottom:24px;">
+ <tr>
+ <td width="40" style="vertical-align:top;padding-top:2px;">
+ <div style="width:36px;height:36px;border-radius:10px;background:#FDEBDD;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:36px;text-align:center;">📦</div>
+ </td>
+ <td style="padding-left:14px;vertical-align:top;">
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:18px;font-weight:700;color:#2A2340;margin-bottom:6px;">Laptop Delivery</div>
+ <p style="margin:0;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13.5px;line-height:1.65;color:#2A2340;">
+ Look for a tracking email from <strong>your equipment vendor</strong> about your laptop shipment.<br>
+ Note that equipment boxes must be stored and saved for returns or replacements.
+ </p>
+ </td>
+ </tr>
+ </table>
+ <!-- ── DIVIDER ─────── -->
+ <div style="height:1px;background:#FFF9F4;margin-bottom:24px;"></div>
+ <!-- ── SECTION: PASSWORD ──────────────────── -->
+ <table role="presentation" width="100%" style="border-collapse:collapse;margin-bottom:8px;">
+ <tr>
+ <td width="40" style="vertical-align:top;padding-top:2px;">
+ <div style="width:36px;height:36px;border-radius:10px;background:#FDEBDD;font-size:18px;line-height:36px;text-align:center;">🔐</div>
+ </td>
+ <td style="padding-left:14px;vertical-align:top;">
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:18px;font-weight:700;color:#2A2340;margin-bottom:6px;">Password Setup</div>
+ <p style="margin:0 0 12px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13.5px;line-height:1.65;color:#2A2340;">
+ One day before your start date, you'll receive a password reset email from <em>The Google Workspace Team</em>
+ (<a href="mailto:workspace-noreply@google.com" style="color:#4A5FC1;text-decoration:none;">workspace-noreply@google.com</a>)
+ sent to this address. <strong>Check your spam/junk folder</strong> if you don't see it. If the link expires or doesn't work, reply to this email for a new one.
+ </p>
+ </td>
+ </tr>
+ </table>
+ <!-- password requirements pill box -->
+ <div style="background:#FFF3EA;border-left:3px solid #C23B4A;border-radius:0 10px 10px 0;padding:14px 18px;margin:0 0 28px 0;">
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#C23B4A;margin-bottom:8px;">Password Requirements</div>
+ <table role="presentation" style="border-collapse:collapse;">
+ <tr>
+ <td style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;color:#2A2340;padding:2px 20px 2px 0;">✓ Minimum 14 characters</td>
+ <td style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;color:#2A2340;padding:2px 0;">✓ Numbers included</td>
+ </tr>
+ <tr>
+ <td style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;color:#2A2340;padding:2px 20px 2px 0;">✓ Uppercase & lowercase</td>
+ <td style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;color:#2A2340;padding:2px 0;">✓ Special characters (!, @, #, $)</td>
+ </tr>
+ </table>
+ </div>
+ <!-- ── DIVIDER ─────── -->
+ <div style="height:1px;background:#FFF9F4;margin-bottom:24px;"></div>
+ <!-- ── SECTION: DEVICE SETUP ──────────────── -->
+ <table role="presentation" width="100%" style="border-collapse:collapse;margin-bottom:16px;">
+ <tr>
+ <td width="40" style="vertical-align:top;padding-top:2px;">
+ <div style="width:36px;height:36px;border-radius:10px;background:#FDEBDD;font-size:18px;line-height:36px;text-align:center;">💻</div>
+ </td>
+ <td style="padding-left:14px;vertical-align:top;">
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:18px;font-weight:700;color:#2A2340;margin-bottom:4px;">Device Login & Setup</div>
+ <!-- time badge -->
+ <div style="display:inline-block;background:#FFE9D6;border:1px solid #FFB38A;border-radius:100px;padding:3px 12px;margin-bottom:12px;">
+ <span style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;font-weight:600;color:#8A3F12;">⏱ Estimated time: 45 minutes</span>
+ </div>
+ </td>
+ </tr>
+ </table>
+ <!-- OS boxes -->
+ <table role="presentation" width="100%" style="border-collapse:collapse;margin-bottom:20px;">
+ <tr>
+ <!-- Windows -->
+ <td class="col-half" width="49%" style="vertical-align:top;padding-right:10px;">
+ <table role="presentation" width="100%" style="border-collapse:collapse;border:1.5px solid #4A5FC1;border-radius:12px;overflow:hidden;">
+ <tr>
+ <td style="background:#4A5FC1;padding:10px 16px;">
+ <span style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;font-weight:600;color:#ffffff;">🪟 Windows Users</span>
+ </td>
+ </tr>
+ <tr>
+ <td style="background:#F4F3FD;padding:14px 16px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;line-height:1.6;color:#2A2340;">
+ A Windows Username and temporary password will be sent shortly. The laptop may be set up any time prior to the start date using the <strong>PDF instructions attached</strong>. Please read carefully.
+ </td>
+ </tr>
+ </table>
+ </td>
+ <!-- Mac -->
+ <td class="col-half" width="49%" style="vertical-align:top;padding-left:10px;">
+ <table role="presentation" width="100%" style="border-collapse:collapse;border:1.5px solid #4A5FC1;border-radius:12px;overflow:hidden;">
+ <tr>
+ <td style="background:#4A5FC1;padding:10px 16px;">
+ <span style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;font-weight:600;color:#ffffff;">🍎 MacBook Users</span>
+ </td>
+ </tr>
+ <tr>
+ <td style="background:#F4F3FD;padding:14px 16px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;line-height:1.6;color:#2A2340;">
+ Your Google Workspace Account must be configured <strong>before</strong> setting up the Mac, as it is required to log in to the laptop for the first time.
+ </td>
+ </tr>
+ </table>
+ </td>
+ </tr>
+ </table>
+ <!-- guides callout -->
+ <table role="presentation" width="100%" style="border-collapse:collapse;margin-bottom:28px;">
+ <tr>
+ <td style="background:#FFF3EA;border:1.5px solid #F3D2BF;border-radius:12px;padding:16px 20px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13.5px;color:#2A2340;font-weight:600;line-height:1.5;">
+ ⌨️ Use our attached step-by-step guides, specific to your computer type, to walk you through setup.
+ </td>
+ </tr>
+ </table>
+ <!-- ── DIVIDER ─────── -->
+ <div style="height:1px;background:#FFF9F4;margin-bottom:24px;"></div>
+ <!-- ── IT SUPPORT BLOCK ────────────────────── -->
+ <table role="presentation" width="100%" style="border-collapse:collapse;margin-bottom:28px;">
+ <tr>
+ <td style="background:#FFF6EE;border:1.5px solid #FF9A62;border-radius:12px;padding:16px 20px;">
+ <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;font-weight:600;color:#2A2340;margin-bottom:4px;">💡 IT Support</div>
+ <p style="margin:0;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;line-height:1.6;color:#2A2340;">
+ If you run into any IT-related issues, reply to this email or reach out to<br>
+ <a href="mailto:it-onboarding@example.com" style="color:#4A5FC1;font-weight:600;text-decoration:none;">it-onboarding@example.com</a>
+ before your onboarding day.
+ </p>
+ </td>
+ </tr>
+ </table>
+ <!-- signature -->
+ <p style="margin:0 0 4px;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;color:#2A2340;line-height:1.6;">We look forward to seeing you soon,</p>
+ <p style="margin:0;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:16px;font-weight:700;color:#2A2340;">ExampleCo IT</p>
+ </td>
+ </tr>
+ </table>
+ </td>
+ </tr>
+ <!-- ── FOOTER ─────────────────────────────────────── -->
+ <tr>
+ <td style="padding:20px 0 0;">
+ <table role="presentation" width="100%" style="border-collapse:collapse;">
+ <tr>
+ <td style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:11.5px;line-height:1.6;color:#6F6585;background:#FFF3EA;border:1px solid #F0DFD3;border-radius:12px;padding:14px 18px;">
+ <strong style="color:#2A2340;">ExampleCo Confidential</strong> — This message (and any attachments) is intended only for the addressee and may contain confidential information. If you received it in error, please delete it and notify the sender.
+ </td>
+ </tr>
+ <tr>
+ <td style="padding-top:14px;text-align:center;font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:11px;color:#6F6585;">
+ © ExampleCo
+ </td>
+ </tr>
+ </table>
+ </td>
+ </tr>
+ </table>
+ </center>
+ </body>
+</html>

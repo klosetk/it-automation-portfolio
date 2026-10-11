@@ -1,0 +1,7 @@
+{
+  "name": "it-automation-samples",
+  "version": "1.0.0",
+  "description": "Illustrative samples of logic used in IT automation workflows",
+  "scripts": { "test": "node --test" },
+  "license": "MIT"
+}
