@@ -20,7 +20,7 @@ flowchart LR
     H --> I[Gmail send]
 ```
 
-The request is sent as `text/plain`, **not** `application/json`, so the agent's raw text arrives untouched and n8n does its own parsing.
+The request is `text/plain`, **not** `application/json`, so the agent's raw text arrives untouched and n8n does its own parsing.
 
 ## Morning vs. evening
 
@@ -31,7 +31,7 @@ The request is sent as `text/plain`, **not** `application/json`, so the agent's 
 | JSON keys | 10 top-level | 9 top-level |
 | Chart 1 | SLA breakdown pie | End-of-day disposition pie |
 | Chart 2 | Load by assignee (open vs. breached) | Assignee activity (resolved, open, breached) |
-| Subject emoji | Status from breach/at-risk counts | 🔴 if any carry-over breaches, else ✅ |
+| Subject marker | Status from breach/at-risk counts | Red marker if any carry-over breaches, else a check mark |
 
 ## Definitions the agent applies
 
@@ -51,7 +51,7 @@ The request is sent as `text/plain`, **not** `application/json`, so the agent's 
 
 **Schema drift was the main failure.** The first prompt described the schema with abstract placeholders (`<ticket key>`). The agent invented top-level keys, flattened nested objects, renamed fields, and replaced per-ticket arrays with aggregate counts.
 
-**The fix:** replace the abstract schema with a **fully filled-in worked example**, plus an explicit "exactly these keys, nothing renamed" checklist. Models copy structure from concrete examples far more reliably than from descriptions.
+**The fix:** replace the abstract schema with a **fully filled-in worked example**, plus an explicit "exactly these keys, nothing renamed" checklist. Models copy structure from concrete examples more reliably than from descriptions.
 
 Other guardrails in the prompt:
 - No markdown mention links in name fields (source data sometimes contains `[Name](/people/...)`)
@@ -62,11 +62,10 @@ Other guardrails in the prompt:
 ## Defense in depth on the n8n side
 
 - **Parse & validate:** strip code fences anywhere, extract from the first `{` to the last `}`, `JSON.parse`, and throw if a required key is missing. See [`samples/validate-agent-json.js`](../../samples/validate-agent-json.js).
-- **Row builders use `pick(obj, [aliases], fallback)`.** Alternate field names are accepted, and missing values render as `—` instead of `undefined`.
-- **Neutral badge on missing status.** A missing `sla_status` shows a neutral badge, not a red "Breached".
+- **Row builders use `pick(obj, [aliases], fallback)`.** Alternate field names are accepted, missing values render as `—` instead of `undefined`, and a missing `sla_status` shows a neutral badge, not a red "Breached".
 - **Recompute, don't trust.** The evening workflow recalculates compliance from raw met/breached counts instead of displaying the agent's percentage, so the figure is always consistent with the counts beside it.
 - **Charts as images.** Gmail strips scripts, so charts are QuickChart image URLs embedded as `<img>`.
 
-## A scoping bug worth remembering
+## A scoping bug
 
-A JQL scoping defect had been silently excluding resolved work from the metrics. The evening report's query is now explicitly scoped to tickets that are open *or* resolved in the last 24 hours.
+A JQL scoping defect had silently excluded resolved work from the metrics. The evening query is now scoped to tickets that are open *or* resolved in the last 24 hours.

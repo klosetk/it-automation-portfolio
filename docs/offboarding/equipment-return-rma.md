@@ -32,21 +32,19 @@ flowchart TD
 
 **Address parsing handles real-world input.** Custom code recognizes 14 address patterns: standard, unit/apartment variants, multi-line, hyphenated house numbers, and PO Box detection (carriers can't ship from them). Phone numbers are normalized to ten digits. A runnable simplified version is in [`samples/parse-address.js`](../../samples/parse-address.js).
 
-**Validate before you create.** Required fields are checked locally, then the address is validated with the carrier's API *before* the RMA is created. This prevents failed RMAs from undeliverable addresses.
+**Validate before you create.** Required fields are checked locally, then the address is validated with the carrier's API *before* the RMA is created, so undeliverable addresses never produce failed RMAs.
 
 **Duplicate RMA recovery.** If the carrier rejects an RMA number as already in use, the workflow regenerates one from the issue key plus a timestamp and retries.
 
-**QR code instead of a printed label.** The tracking number becomes a QR image the employee scans at a carrier print-and-ship location, so no printer or box is required unless they request a pickup.
+**QR code instead of a printed label.** The employee scans a QR image at a carrier print-and-ship location, so no printer or box is required unless they request a pickup.
 
-**Draft, not send.** The departure email is created as a Gmail **draft**. A person reviews and sends it. Automation does the work; a human owns the outbound message.
+**Draft, not send.** The departure email is a Gmail **draft**; a person reviews and sends it.
 
-**Parallel asset lookup.** While the address is being validated, the workflow finds the employee's devices and renders an HTML list into the email.
-
-**Status handoff.** Jira waits 60 seconds after calling n8n, then transitions the ticket itself, keeping ticket state moving without depending on n8n's response.
+**Status handoff.** Jira transitions the ticket itself after 60 seconds, so ticket state doesn't depend on n8n's response.
 
 ## Email
 
-Branded banner with an "Action Required" badge, QR code box with RMA number and store-locator button, a device list, and a scheduled-pickup section with a checklist. See [`templates/equipment-return-email.html`](../../templates/equipment-return-email.html).
+Branded banner with an "Action Required" badge, a QR code box with RMA number and store-locator button, a device list, and a scheduled-pickup checklist. See [`templates/equipment-return-email.html`](../../templates/equipment-return-email.html).
 
 ![Equipment return email preview](../images/equipment-return-email.png)
 

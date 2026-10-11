@@ -6,7 +6,7 @@ Architecture write-ups for an IT operations automation stack: **employee onboard
 
 ## The pattern
 
-Almost every workflow here follows one shape:
+Almost every workflow follows one shape:
 
 ```mermaid
 flowchart LR
@@ -15,7 +15,7 @@ flowchart LR
     N -->|write back| J
 ```
 
-**Jira owns the event. n8n owns the orchestration. The systems of record own the truth.** Humans stay in the loop for anything irreversible.
+**Jira owns the event. n8n owns the orchestration. The systems of record own the truth.**
 
 ## Contents
 
@@ -24,7 +24,7 @@ flowchart LR
 |----------|--------------|
 | [Role-based provisioning](docs/onboarding/role-based-provisioning.md) | One approved ticket → accounts, OU, device groups, and role-based app access |
 | [Welcome email orchestrator](docs/onboarding/welcome-email-orchestrator.md) | Routes by employment type, attaches the right setup guides, confirms in Slack |
-| [Password reset + 2SV reminder](docs/onboarding/password-reset-and-2sv-reminder.md) | Fast access recovery with a self-expiring security exception |
+| [Password reset + 2SV reminder](docs/onboarding/password-reset-and-2sv-reminder.md) | Fast access recovery with a time-bound security exception |
 
 ### Offboarding
 | Write-up | What it does |
@@ -46,7 +46,7 @@ flowchart LR
 | Write-up | What it does |
 |----------|--------------|
 | [AI triage & overflow routing](docs/ai-and-reporting/triage-overflow-routing.md) | Agent classifies, explains risk, and summarizes; routing stays deterministic |
-| [SLA metrics reports](docs/ai-and-reporting/sla-metrics-reports.md) | Daily AI-assisted reports, and how I made LLM JSON output reliable |
+| [SLA metrics reports](docs/ai-and-reporting/sla-metrics-reports.md) | Daily AI-assisted reports, and how LLM JSON output was made reliable |
 
 ### Infrastructure
 | Write-up | What it does |
@@ -65,7 +65,7 @@ flowchart LR
 3. **Fail loudly, with a next step.** Every error path posts somewhere with a link or a reason.
 4. **Validate before you act.** Check addresses, payloads, and fields before calling external APIs.
 5. **Don't trust LLM output.** Constrain it with worked examples, then parse, validate, and recompute.
-6. **Document the gaps.** Each write-up lists known limitations and next steps.
+6. **Document the gaps.** Write-ups state known limitations and next steps instead of omitting them.
 
 ## Tech
 

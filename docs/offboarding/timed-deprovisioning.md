@@ -36,23 +36,19 @@ flowchart TD
 | Behavior | Why |
 |----------|-----|
 | **Polling every 7 minutes** with a JQL filter on separation date or last working day | Catches the right day without per-ticket schedules |
-| **Payload validation** (separation time and issue key required; fails loudly if missing) | Bad data should stop the run, not silently skip it |
-| **Timezone parsing** from free-text values like `Pacific Time (GMT-7)` | Calendar entries and wait times land at the correct local moment |
+| **Payload validation** (separation time and issue key required) | Bad data stops the run instead of silently skipping it |
+| **Timezone parsing** from free-text values like `Pacific Time (GMT-7)` | Calendar entries and waits land at the correct local moment |
 | **Calendar event** for IT at separation time | Visibility even if a Slack message is missed |
-| **Wait node** held until the exact separation instant (UTC) | Access is removed at the right minute, not "sometime that day" |
+| **Wait** until the exact separation instant (UTC) | Access is removed at the right minute, not "sometime that day" |
 | **Two-step lookup** (Google Admin, then Jira by last name, real accounts only) | Survives username mismatches |
-| **Manager field update** before removal | Keeps the org chart accurate in the directory after departure |
+| **Manager field update** before removal | Keeps the directory's org chart accurate after departure |
 | **Group snapshot** posted to the ticket | Audit trail of access held at the moment of removal |
-| **Double approval in Slack**, with a warning that this removes all Workspace access and locks devices | Human checkpoint before the irreversible step |
-| **Post-action verification** of OU placement | Never assumes the action worked |
+| **Double approval in Slack**, warning that this removes all Workspace access and locks devices | Human checkpoint before the irreversible step |
+| **OU placement check** after the move | Never assumes the action worked |
 
-## Safety properties
-
-- No account found in either system → alert and **stop**; nothing is guessed.
-- Irreversible action only after both approvals.
-- Every state change leaves a Jira comment.
+Nothing is guessed: if neither system has the account, the run alerts and stops. Every state change leaves a Jira comment.
 
 ## Related
 
-- Group snapshot comes from the [Directory Lookup Service](../infrastructure/directory-lookup-service.md).
+- The group snapshot comes from the [Directory Lookup Service](../infrastructure/directory-lookup-service.md).
 - Device recovery continues in [Equipment Return](equipment-return-rma.md).

@@ -4,7 +4,7 @@
 **Platforms:** Jira Cloud Automation, JSM Assets  
 **Status:** Active
 
-Bridges service requests and asset governance: when someone reports a device problem, the linked asset's lifecycle state updates itself, with an audit trail embedded in the record.
+When someone reports a device problem, the linked asset's lifecycle state updates itself, with an audit trail embedded in the record.
 
 ## Flow
 
@@ -21,7 +21,7 @@ flowchart TD
 
 ## Behavior
 
-The rule edits three attributes on the linked asset via the Assets field action:
+The rule edits three attributes on the linked asset via the Assets field action. Each reported condition maps to exactly one state.
 
 | Attribute | Value |
 |-----------|-------|
@@ -29,13 +29,7 @@ The rule edits three attributes on the linked asset via the Assets field action:
 | **Lifecycle Notes** | `<issue key> - Lifecycle changed to <state> by <reporter> on <timestamp>` |
 | **Lifecycle Updated** | Current timestamp |
 
-## Design characteristics
-
-1. **Event-driven.** Fires only on issue creation.
-2. **Deterministic mapping.** Each request condition maps to exactly one state.
-3. **Automated timestamping.**
-4. **Embedded audit trail.** Who triggered the change, from which ticket, and when, recorded in the asset itself.
-5. **Asset-centric.** Updates the CMDB record directly.
+The notes attribute records who triggered the change, from which ticket, and when.
 
 ## Requirements
 
@@ -45,11 +39,11 @@ The rule edits three attributes on the linked asset via the Assets field action:
 
 ## Position in the architecture
 
-Complements the [MDM sync workflows](mdm-sync-workflows.md). Syncs ingest devices and set *Active*; this rule manages the operational lifecycle afterward.
+Complements the [MDM sync workflows](mdm-sync-workflows.md): syncs ingest devices and set *Active*; this rule manages the lifecycle afterward.
 
-## Known gaps (documented, not discovered later)
+## Limitations and next steps
 
-- Triggers on creation only, not on status transitions
+- Triggers on issue creation only, not on status transitions
 - No reverse transitions (e.g., Lost → Active)
 - No approval gating or validation
 - No reassignment logic

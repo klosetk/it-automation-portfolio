@@ -6,12 +6,6 @@
 
 A small, serverless, read-only API that returns a user's directory profile so automations can verify access without each one holding admin credentials.
 
-## Purpose
-
-Confirm Workspace access removal during offboarding by pulling authoritative directory data at ticket-closure time and attaching it to the Jira ticket as evidence.
-
-**Returns (read-only):** display name, primary email, organizational unit, group memberships.
-
 ## Architecture
 
 ```mermaid
@@ -25,7 +19,7 @@ flowchart LR
 
 ## Identity & security model
 
-The service intentionally separates **runtime identity** from **directory access identity**.
+The service separates **runtime identity** from **directory access identity**.
 
 | Identity | Purpose | Notes |
 |----------|---------|-------|
@@ -34,9 +28,11 @@ The service intentionally separates **runtime identity** from **directory access
 
 Result: clear ownership, minimal blast radius, clean audit logs, and an easy kill switch.
 
-**Controls:** no public access (authenticated ingress only) · header-based API token on top of IAM · secrets only in Secret Manager, never in code or env files · no write access to Workspace.
+**Controls:** authenticated ingress only (no public access) · header-based API token on top of IAM · secrets only in Secret Manager, never in code or env files.
 
 ## API
+
+Returns (read-only): display name, primary email, organizational unit, group memberships.
 
 `POST /lookup`  
 Headers: `Content-Type: application/json`, `X-API-TOKEN: <shared internal secret>`
@@ -61,7 +57,9 @@ Headers: `Content-Type: application/json`, `X-API-TOKEN: <shared internal secret
 | 404 | User not found (expected for deleted or suspended users) |
 | 500 | Internal error (check logs, credentials, API enablement) |
 
-## Using it for offboarding verification
+## Offboarding verification
+
+Confirms Workspace access removal by pulling authoritative directory data at ticket-closure time and attaching it to the Jira ticket as evidence. [Timed deprovisioning](../offboarding/timed-deprovisioning.md) also calls it for the pre-removal group snapshot.
 
 1. Jira webhook fires on an offboarding status change
 2. n8n extracts the employee email and calls `/lookup`
@@ -70,13 +68,13 @@ Headers: `Content-Type: application/json`, `X-API-TOKEN: <shared internal secret
 
 ## Operations
 
-- **Monitoring:** request count, latency, error rate, instance count; application logs of request cycles, auth failures, Google API errors
+- **Monitoring:** request count, latency, error rate, instance count; logs of request cycles, auth failures, Google API errors
 - **Maintenance:** rotate API tokens quarterly, review service-account permissions annually, monitor quotas, patch dependencies
 - **Key rotation:** generate new key → update the secret → redeploy → revoke the old key after verification
 
 ## Cost
 
-Request-based billing with a generous free tier (about 2M requests, 180k vCPU-seconds, 360k GiB-seconds per month). Admin SDK is free within quota. Estimated under $5/month for typical IT automation volume.
+Request-based billing with a free tier of about 2M requests, 180k vCPU-seconds, and 360k GiB-seconds per month. Admin SDK is free within quota. Estimated under $5/month for typical IT automation volume.
 
 ## Deploy (illustrative)
 

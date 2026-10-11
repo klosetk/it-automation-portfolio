@@ -25,16 +25,22 @@ flowchart LR
 
 ## Device scope
 
-| Device type | MDM source | Sync workflow |
-|-------------|-----------|---------------|
-| MacBooks | Kandji / Iru | MacBook import |
-| Windows laptops | Entra ID / Intune | Windows import |
-| iPhones | MaaS360 | iPhone import (legacy) |
-| Android phones | MaaS360 | Android import (legacy) |
-| iPads | MaaS360 | iPad import (legacy) |
-| Android tablets | MaaS360 | Tablet import (legacy) |
+| Device type | MDM source | Unique key |
+|-------------|-----------|------------|
+| MacBooks | Kandji / Iru | Serial Number |
+| Windows laptops | Entra ID / Intune | Serial Number |
+| iPhones | MaaS360 (legacy) | IMEI |
+| Android phones | MaaS360 (legacy) | IMEI |
+| iPads | MaaS360 (legacy) | MDM device UID |
+| Android tablets | MaaS360 (legacy) | n/a |
 
 **Out of scope:** peripherals, software licenses, accessories, non-MDM-managed devices.
+
+## Deduplication via AQL
+
+Every query is scoped to the **Asset Management** object schema. Without that scope, queries can match objects in legacy schemas and create duplicates.
+
+Example: `objectType = "Windows" AND objectSchema = "Asset Management" AND "Serial Number" = "<value>"`
 
 ## Ownership model
 
@@ -48,25 +54,13 @@ flowchart LR
 
 Active · Stored Inventory · In Repair · Damaged · Lost / Stolen · Enrollment / Setup Error · Decommissioned · Retired
 
-**Automation:** when a sync populates Assigned User with a valid internal account ID, Lifecycle State is set to **Active** automatically. See [lifecycle status automation](lifecycle-status-automation.md) for the request-driven states.
+When a sync populates Assigned User with a valid internal account ID, Lifecycle State is set to **Active** automatically. See [lifecycle status automation](lifecycle-status-automation.md) for the request-driven states.
 
 ## Shared hardware attributes
 
 Name · Assigned User · Model · OS Version · Last Check-in · Linked lifecycle ticket · IMEI (mobile) · MDM device ID (mobile) · MDM / Compliance status · Serial number (primary dedup key for laptops) · Lifecycle State
 
 Compliance status is sourced per platform: Entra compliance for Windows, Kandji active status for macOS, MaaS360 compliance for mobile.
-
-## Deduplication via AQL
-
-Every query is scoped to the **Asset Management** object schema. Without that scope, queries can match objects in legacy schemas and create duplicates.
-
-| Device type | Unique key |
-|-------------|------------|
-| MacBooks, Windows | Serial Number |
-| iPhones, Android phones | IMEI |
-| iPads | MDM device UID |
-
-Example: `objectType = "Windows" AND objectSchema = "Asset Management" AND "Serial Number" = "<value>"`
 
 ## Schedule
 
@@ -82,8 +76,6 @@ The user-mapping sync runs **first** each day so account IDs are resolved before
 - Status updates triggered from Jira automation
 - Service desk UAT sign-off
 
-## Limitations / next steps
+## Limitations and next steps
 
-- Full-inventory pulls on every run (no delta sync)
-- No retirement logic when a device disappears from an MDM
-- No change history written to the asset record
+See [MDM sync workflows](mdm-sync-workflows.md#limitations-and-next-steps).
